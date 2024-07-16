@@ -27,7 +27,7 @@ class NewsItemWidget extends StatelessWidget {
           ),
           Text(
             news.title ?? 'No title',
-            style: TextStyle(fontSize: 10, color: Color(0xff79828B)),
+            style: TextStyle(fontSize: 11, color: Colors.black54),
           ),
           SizedBox(
             height: 5,
@@ -36,16 +36,22 @@ class NewsItemWidget extends StatelessWidget {
             news.description ?? 'No Description',
             style: TextStyle(fontSize: 14, color: Color(0xff383f46)),
           ),
-          Text(
-            formatDate(news.publishedAt ?? 'No Date'),
-            textAlign: TextAlign.end,
-            style: TextStyle(fontSize: 12, color: Color(0xff79828B)),
+          SizedBox(
+            height: 6,
           ),
           Text(
             news.author ?? 'Unknown Author',
+            textAlign: TextAlign.end,
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff42505C)),
+          ),
+          Text(
+            formatDate(news.publishedAt ?? 'No Date'),
             textAlign: TextAlign.start,
-            style: TextStyle(fontSize: 12, color: Color(0xff42505C)),
-          )
+            style: TextStyle(fontSize: 12, color: Color(0xff79828B)),
+          ),
         ],
       ),
     );
