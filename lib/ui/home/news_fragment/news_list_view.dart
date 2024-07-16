@@ -19,7 +19,7 @@ class _NewsListViewState extends State<NewsListView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.getNews(widget.source.id!);
+    viewModel.getNews(widget.source.id ?? '');
   }
 
   @override
@@ -27,7 +27,7 @@ class _NewsListViewState extends State<NewsListView> {
     // her i used didUpdateWidget() after initState(), because initState called one time when project going on to build, but i want the function getNews to called every time i click on source to updated with sourceId, so i used didUpdateWidget().
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    viewModel.getNews(widget.source.id!);
+    viewModel.getNews(widget.source.id ?? '');
   }
 
   @override
@@ -77,24 +77,22 @@ class _NewsListViewState extends State<NewsListView> {
                 Text(state.message),
               ],
             ));
-
           case ErrorState():
             return Center(
                 child: Column(children: [
               Text(state.errorMessage ?? ''),
               ElevatedButton(
                   onPressed: () {
-                    viewModel.getNews(widget.source.id!);
+                    viewModel.getNews(widget.source.id ?? '');
                   },
                   child: Text('Try Again'))
             ]));
-
           case SuccessState():
             return Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) =>
                     NewsItemWidget(news: state.newsList![index]),
-                itemCount: state.newsList?.length ?? 0,
+                itemCount: state.newsList?.length,
               ),
             );
         }

@@ -6,8 +6,8 @@ import '../../../model/news_response/News.dart';
 class NewsListViewModel extends Cubit<NewsListState> {
   NewsListViewModel() : super(LoadingState(message: 'Loading...'));
 
-  Future<void> getNews(String sourceId) async {
-    emit(LoadingState(message: 'Loading...'));
+  void getNews(String sourceId) async {
+    // emit(LoadingState(message: 'Loading...'));
     try {
       var response = await ApiManager.getNews(sourceId);
       if (response.status == 'error') {
