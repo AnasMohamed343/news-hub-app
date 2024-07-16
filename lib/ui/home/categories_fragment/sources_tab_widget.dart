@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_hub/ui/home/categories_fragment/tab_item_widget.dart';
-import 'package:news_hub/ui/home/news_fragment/news_list_widget.dart';
+import 'package:news_hub/ui/home/news_fragment/news_list_view.dart';
 import '../../../model/source_response/Source.dart';
 
 class SourcesTabWidget extends StatefulWidget {
@@ -35,7 +35,7 @@ class _SourcesTabWidgetState extends State<SourcesTabWidget> {
                       ))
                   .toList(),
             ),
-            NewsListWidget(
+            NewsListView(
                 source: widget.sources[
                     selectedIndex]), //write (widget) before sources . because i can't access any thing in StatefulWidget without write (widget)
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_hub/ui/component/category_widget.dart';
 import 'package:news_hub/ui/home/categories_fragment/categories_fragment.dart';
-import 'package:news_hub/ui/home/categories_fragment/category_details.dart';
+import 'package:news_hub/ui/home/categories_fragment/category_details_view.dart';
 import 'package:news_hub/ui/home/home_drawer.dart';
 import 'package:news_hub/ui/home/settings_fragment/settings_fragment.dart';
 
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onCategoryItemClicked(CategoryItem categoryItem) {
-    selectedWidget = CategoryDetails(
+    selectedWidget = CategoryDetailsView(
       categoryItem: categoryItem,
     );
     setState(() {});
