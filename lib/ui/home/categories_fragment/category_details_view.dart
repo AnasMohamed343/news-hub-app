@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_hub/api_manager/api_manager.dart';
+import 'package:news_hub/di/di.dart';
 import 'package:news_hub/ui/component/category_widget.dart';
 import 'package:news_hub/ui/home/categories_fragment/category_details_view_model.dart';
 import 'package:news_hub/ui/home/categories_fragment/sources_tab_widget.dart';
@@ -14,7 +14,8 @@ class CategoryDetailsView extends StatefulWidget {
 }
 
 class _CategoryDetailsViewState extends State<CategoryDetailsView> {
-  CategoryDetailsViewModel viewModel = CategoryDetailsViewModel();
+  CategoryDetailsViewModel viewModel = getIt.get<
+      CategoryDetailsViewModel>(); // to get the objects het want from di.config
 
   @override
   void initState() {
