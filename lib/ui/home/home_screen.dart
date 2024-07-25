@@ -4,6 +4,7 @@ import 'package:news_hub/ui/home/categories_fragment/categories_fragment.dart';
 import 'package:news_hub/ui/home/categories_fragment/category_details_view.dart';
 import 'package:news_hub/ui/home/home_drawer.dart';
 import 'package:news_hub/ui/home/settings_fragment/settings_fragment.dart';
+import 'package:news_hub/ui/search_delegate.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = 'Home Screen';
@@ -33,6 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 18),
+              child: IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: SearchScreen());
+                  },
+                  icon: Icon(
+                    Icons.search,
+                    size: 30,
+                  )),
+            )
+          ],
           title: Text(
             'News Hub',
           ),

@@ -1,20 +1,47 @@
+import 'dart:ffi';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_hub/api_manager/api_manager.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_hub/data/datasource_impl/news_datasource_impl.dart';
+import 'package:news_hub/data/repository_impl/news_repository_impl.dart';
 
-import '../../../model/news_response/News.dart';
+import '../../../data/api/api_manager.dart';
+import '../../../data/api/model/news_response/News.dart';
+import '../../../data/datasource_contract/news_datasource.dart';
+import '../../../repository_contract/news_repository.dart';
 
+@injectable
 class NewsListViewModel extends Cubit<NewsListState> {
-  NewsListViewModel() : super(LoadingState(message: 'Loading...'));
+  late NewsRepository newsRepository;
+  @factoryMethod
+  NewsListViewModel({required this.newsRepository})
+      : super(LoadingState(message: 'Loading...'));
 
-  void getNews(String sourceId) async {
+  void getNews(String sourceId, int page) async {
     // emit(LoadingState(message: 'Loading...'));
     try {
-      var response = await ApiManager.getNews(sourceId);
-      if (response.status == 'error') {
-        emit(ErrorState(errorMessage: response.message));
-      } else {
-        emit(SuccessState(newsList: response.articles));
-      }
+      var articles = await newsRepository.getNews(sourceId, page);
+      emit(SuccessState(newsList: articles));
+      // if (response.status == 'error') {
+      //   emit(ErrorState(errorMessage: response.message));
+      // } else {
+      //   emit(SuccessState(newsList: response.articles));
+      // }
+    } catch (e) {
+      emit(ErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  void loadSearchNews(String query) async {
+    // emit(LoadingState(message: 'Loading...'));
+    try {
+      var articles = await newsRepository.getSearchNews(query);
+      emit(SuccessState(newsList: articles));
+      // if (response.status == 'error') {
+      //   emit(ErrorState(errorMessage: response.message));
+      // } else {
+      //   emit(SuccessState(newsList: response.articles));
+      // }
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
     }
